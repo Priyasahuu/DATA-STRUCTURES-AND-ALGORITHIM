@@ -1,0 +1,21 @@
+class Solution {
+public:
+ char c( int k , string ans){
+        if(ans.size() >=k)return ans[k-1];
+        else{
+                const  int n = ans.size();
+                  for(int i = 0 ; i < n ; i  ++){
+                    char ch= (ans[i] - 'a' + 1) % 26 + 'a';
+                    ans += ch;
+
+                  }
+
+        }
+        return c( k , ans);
+ }
+    char kthCharacter(int k) {
+        string ans ="";
+        ans += 'a';
+      return c( k , ans);  
+    }
+};
