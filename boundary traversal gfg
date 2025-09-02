@@ -1,0 +1,73 @@
+/*
+// Tree Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+  bool isleaf( Node* root){
+      if( !root ->left && !root ->right){
+          return true;
+      }
+      return false;
+  }
+   void f1( Node * root , vector<int>& ans){
+       Node* node= root->left;
+       while(node){
+           if(!isleaf(node))ans.push_back( node->data);
+           if(node->left) node= node->left;
+           else node= node->right;
+       }
+   }
+    void f3( Node* root , vector<int>&ans){
+       if( isleaf(root)){
+           ans.push_back(root->data);
+           
+           return ;
+       }
+       if( root->left){
+           f3(root->left , ans);
+       }
+       if(root->right){
+           f3(root->right , ans);
+       }
+       
+   }
+   
+   void f2( Node* root , vector<int>& ans){
+      Node* node= root->right;
+      vector<int>temp;
+       while(node){
+           if(!isleaf(node))temp.push_back( node->data);
+           if(node->right) node= node->right;
+           else node= node->left;
+       }  
+       int n = temp.size();
+       for( int i =  n-1 ; i >=0 ; i  --){
+           ans.push_back( temp[i]);
+       }
+   }
+  
+    vector<int> boundaryTraversal(Node *root) {
+      
+         vector<int> ans;
+         if(root ==NULL)return ans;
+         if(!isleaf(root))ans.push_back(root->data);
+         f1(root , ans);
+         f3(root , ans);
+         f2( root , ans);
+         return ans;
+    }
+};
