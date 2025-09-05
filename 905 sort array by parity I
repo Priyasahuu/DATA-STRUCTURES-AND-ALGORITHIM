@@ -1,0 +1,31 @@
+class Solution {
+public:
+void swap( int l , int r , vector<int> &arr){
+    int temp= arr[l];
+    arr[l]=arr[r];
+    arr[r]= temp;
+
+}
+    vector<int> sortArrayByParity(vector<int>& nums) {
+       int l= 0;
+       int r= nums.size()-1;
+       while(l< r){
+       
+       if( nums[l]%2 !=0 && nums[r]%2==0){
+        swap( l , r  , nums);
+        l++;
+        r--;
+       }
+       else if( nums[l]%2 !=0 && nums[r]%2  !=0)r--;
+       else if( nums[l] %2==0 && nums[r]%2 !=0){
+        l++;
+        r--;
+       }
+       else{
+        l++;
+       }
+
+       } 
+       return nums;
+    }
+};
