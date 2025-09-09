@@ -1,0 +1,40 @@
+class Solution {
+public:
+    TreeNode* f( TreeNode* root ,TreeNode* prev,  int key){
+        if( root ==NULL)return root;
+     if( root ->val == key && prev==NULL){
+    root->right ->left= root->left;
+    return root;
+
+   }
+   else if( root->val == key){
+    if( root->val > prev ->val){
+        prev->right =root->left;
+        prev->left->left= root->right;
+    }
+    else{
+        prev-> left= root->right;
+        prev->left->left= root->left;
+    }
+   }
+   prev= root;
+   f( root->left , root , key);
+   f( root->right , root , key);
+
+   
+
+    return root;
+
+}
+        
+    
+    TreeNode* deleteNode(TreeNode* root, int key) {    
+       if( root ==NULL)return root ;
+
+
+    return f( root ,NULL , key);
+
+
+
+    }
+};
