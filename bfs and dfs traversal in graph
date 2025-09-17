@@ -1,0 +1,43 @@
+class Solution {
+  public:
+   
+   void  f(int node , vector<int>& vis , vector<int> adj[] , vector<int>&ans ){
+    
+            vis[node]=1;
+            ans.push_back(node);
+            for( auto it: adj[node]){
+              if(!vis[it]){
+                f( it , vis , adj , ans);
+              }
+            }
+
+   }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+     vector<int> vis(V, 0);
+     int start = 0;
+     vector<int> ls;
+    f( start , vis, adj , ls);
+     return ls;
+    }
+    
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+         vector<int> vis(V , 0);
+         queue<int> q;
+         q.push( 0);
+         vis[0]=1;
+         vector<int>ans;
+         while(!q.empty()){
+          int node= q.front();
+          q.pop();
+          ans.push_back(node);
+          for( auto it: adj[node]){
+            if(!vis[it]){
+              q.push( it);
+              vis[it]=1;
+            }
+          }
+         }
+         return ans;
+
+    }
+};
