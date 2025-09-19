@@ -1,0 +1,26 @@
+class Solution {
+public:
+ void f( vector<int>& nums , int start , vector<int>& p , vector<vector<int>>&result , set<vector<int>>&st){
+    if(st.find(p)==st.end()){
+    result.push_back( p);
+    st.insert(p);
+    }
+
+    for( int i = start ; i < nums.size() ;  i ++){
+        
+        p.push_back( nums[i]);
+
+        f(  nums , i +1 , p , result ,st);
+        p.pop_back();
+    }
+   }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+      set<vector<int>> st;
+       vector<vector<int>> result;
+     vector<int>p;
+     sort( nums.begin() , nums.end());
+     f( nums , 0 , p , result , st);
+     return result;   
+        
+    }
+};
