@@ -1,0 +1,17 @@
+class Solution {
+public:
+   void f( vector<int>& nums , int start , vector<int>& p , vector<vector<int>>&result){
+    result.push_back( p);
+    for( int i = start ; i < nums.size() ;  i ++){
+        p.push_back( nums[i]);
+        f(  nums , i +1 , p , result);
+        p.pop_back();
+    }
+   }
+    vector<vector<int>> subsets(vector<int>& nums) {
+     vector<vector<int>> result;
+     vector<int>p;
+     f( nums , 0 , p , result);
+     return result;   
+    }
+};
