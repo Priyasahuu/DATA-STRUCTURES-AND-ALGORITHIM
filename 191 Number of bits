@@ -1,0 +1,11 @@
+class Solution {
+    public int hammingWeight(int n) {
+        String bin= Integer.toBinaryString(n);
+        int m = bin.length();
+        int cnt=0;
+       for( int i = 0 ; i < m ; i ++){
+        if( bin.charAt(i)=='1')cnt+=1;
+       }
+       return cnt;
+    }
+}
