@@ -1,0 +1,20 @@
+class Solution {
+public:
+bool dfs( int total , int j1 , int j2 , int j , int target  , vector<int>&vis){
+    if( j > total || j <0 || vis[j]==1){
+        return false;
+    }
+    if( j==target)return true;
+    vis[j]=1;
+        bool a=dfs( total  , j1 , j2 , j-j1 ,target , vis);
+        bool b=dfs( total  , j1 , j2 , j +j1,target , vis);
+        bool c=dfs( total  , j1 , j2 , j-j2 ,target , vis);
+        bool d=dfs( total  , j1 , j2 , j +j2,target , vis);
+    return a||b||c||d;
+}
+    bool canMeasureWater(int x, int y, int target) {
+        int  total = x+y;
+        vector<int> vis(total+1 , 0);
+        return dfs( total  , x , y , 0 , target , vis);
+    }
+};
