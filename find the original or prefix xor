@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> findArray(vector<int>& pref) {
+       int n = pref.size();
+       int x=pref[0];
+       for( int i = 1  ; i  < n ;  i ++) {
+        int ans = pref[i]^x;
+        pref[i]=ans;
+        x ^= pref[i];
+       }
+       return pref;
+    }
+};
