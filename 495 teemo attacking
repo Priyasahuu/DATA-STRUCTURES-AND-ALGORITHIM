@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int findPoisonedDuration(vector<int>& timeSeries, int duration) {
+       int cnt=0;
+     int n = timeSeries.size();
+     for( int i = 0 ;  i < n-1 ;  i ++){
+        int diff= timeSeries[i+1]-timeSeries[i];
+      if( diff> duration){
+        cnt += duration;
+      }
+      else{
+        cnt +=diff;
+      }
+     }
+     return cnt += duration;
+    }
+};
+TC: O(N)
+SC= O(1)
