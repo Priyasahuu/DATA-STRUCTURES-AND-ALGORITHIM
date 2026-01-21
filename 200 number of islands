@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int row[4] = {-1, 1, 0, 0};
+    int col[4] = {0, 0, -1, 1};
+
+    void f(int ro, int co, vector<vector<char>>& grid, int n, int m,
+           vector<vector<int>>& vis) {
+        vis[ro][co] = 1;
+        for (int i = 0; i < 4; i++) {
+          
+                int rows = ro + row[i];
+                int cols = co + col[i];
+                if (rows >= 0 && rows < n && cols >= 0 && cols < m &&
+                    grid[rows][cols] == '1' && vis[rows][cols] == -1) {
+                    f(rows, cols, grid, n, m, vis);
+                
+            }
+        }
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int cnt = 0;
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n, vector<int>(m, -1));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '1' && vis[i][j] == -1) {
+                    cnt += 1;
+                    f(i, j, grid, n, m, vis);
+                }
+            }
+        }
+        return cnt;
+    }
+};
+
+Metric	Complexity
+Time Complexity	O(n × m)
+Space Complexity	O(n × m)
