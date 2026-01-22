@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<string> ans;
+    bool isvalid( string s , string sb){
+        if( stoi(sb) <= 255  && sb[0]!='0')return true;
+        return false;
+    }
+    void  f( string s , int idx ,  int cnt , string current){
+        int n = s.size() ; 
+        if( idx==n && cnt ==4){
+            current.pop_back();
+            ans.push_back( current);
+            return;
+           
+        }
+        if( idx +1 <=n){
+            f( s, idx+1 , cnt+1 , current+ s.substr( idx,1)+".");
+        }
+         if( idx +2 <=n && isvalid( s ,  s.substr( idx,2))){
+            f( s, idx+2 , cnt+1 , current+ s.substr( idx,2)+".");
+        }
+         if( idx +3 <=n &&isvalid( s ,  s.substr( idx,3))){
+            f( s, idx+3 , cnt+1 , current+ s.substr( idx,3)+".");
+        }
+        
+        
+    }
+    vector<string> restoreIpAddresses(string s) {
+        f(s , 0 , 0 , "");
+        return ans;
+
+    }
+};
+TC(3^n)*n)
+SC = O(k), where k = number of generated outputs
