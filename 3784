@@ -1,0 +1,25 @@
+class Solution {
+public:
+    long long minCost(string s, vector<int>& cost) {
+     unordered_map< char , long long> mpp;
+     int n = s.size();
+     for( int i = 0 ; i  <  n  ; i  ++){
+        mpp[s[i]]+=cost[i];
+     }   
+     vector< long long> h;
+     for( auto &p : mpp){
+        h.push_back( p.second);
+     }
+     sort( h.begin() , h.end());
+     long long sum = 0;
+     int m = h.size();
+     if( m==1)return 0;
+     for( int i = 0 ; i  < m-1; i  ++){
+        sum += h[i];
+     }
+     return sum;
+    }
+}; 
+Complexity	Value
+Time	O(n + k log k)
+Space	O(k)
