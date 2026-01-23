@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string reversePrefix(string s, int k) {
+     int n =s.size();
+     int i = 0 ; int j = k-1;
+     if( k> n|| k<=0)return s;
+      while (i + k <= n){
+        int p = i , l = j;
+        while( p<l){
+            char temp= s[p];
+            s[p]=s[l];
+            s[l]=temp;
+            p++;
+            l--;
+        }
+       return s;
+     }  
+     return s;  
+    }
+};
