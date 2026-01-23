@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool check(unordered_map<char , int>&mpp){
+        int mini= INT_MAX , maxi=INT_MIN;
+        for(pair<char , int> p : mpp){
+            mini= min(mini, p .second);
+            maxi= max( maxi , p.second);  
+                  }
+                  return mini==maxi;
+    
+}
+    int longestBalanced(string s) {
+      int ans=0;
+      
+      int n = s.size();
+      for( int i  =0 ;  i < n  ;  i ++){
+        unordered_map<char , int> mpp;
+        for( int j = i  ; j  < n  ;  j ++){
+            mpp[s[j]]++;
+            if( check(mpp)){
+                ans= max( ans , j-i+1);
+            }
+        }
+      }
+      return ans;
+    }
+};
