@@ -1,0 +1,16 @@
+Complexity Type	Value
+Time	O(C(9, k) × k)
+Auxiliary Space	O(k)
+Including Output	O(C(9, k) × k)
+void f(int k, int target, int start, vector<int> path) {
+    if(k == 0 && target == 0) {
+        ans.push_back(path);
+        return;
+    }
+    for(int i = start; i <= 9; i++) {
+        if(i > target || k <= 0) break;
+        path.push_back(i);
+        f(k - 1, target - i, i + 1, path);
+        path.pop_back();
+    }
+}
