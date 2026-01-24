@@ -1,0 +1,31 @@
+TC=O(n⋅2n)
+SC=O(n⋅2n)
+
+
+
+class Solution {
+public:
+vector<vector<string>> ans;
+bool isvalid( string s){
+    string b = reverse(s.begin() , s.end());
+    return s==b;
+}
+     void f( int start , string s , vector<string> ans , int cnt ){
+        if( cnt==s.size())an.push_back(ans);
+        for( int i =start ; i <s.size() ; i++){
+             string ab= s.substr( start , i+1);
+             if( isvalid(ab)){
+
+              cnt +=sb.size();
+              ans.push_back(ab);
+              f( i  , s , ans , cnt);
+              ans.pop_back();
+              }
+        }
+     }
+    vector<vector<string>> partition(string s) {
+        vector<string> an;
+        f(  0 , s , ans , 0);
+       return ans; 
+    }
+};
