@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        vector<string> ans;
+        unordered_map<  char , int>mpp;
+        string s1="qwertyuiop";
+        string s2= "asdfghjkl";
+        string s3="zxcvbnm";
+        for( int i = 0 ; i < s1.size() ; i ++){
+            mpp[s1[i]]=1;
+        }
+         for( int i = 0 ; i < s2.size() ; i ++){
+            mpp[s2[i]]=2;
+        }
+         for( int i = 0 ; i < s3.size() ; i ++){
+            mpp[s3[i]]=3;
+        }
+        for(string s: words){
+            int m = s.size();
+            int target= mpp[tolower(s[0])];
+            bool f=true;
+            for( int i = 1 ; i < m ; i ++){
+                if( mpp[tolower(s[i])] !=target){
+                    f=false;
+                    break;
+                }
+
+            }
+            if(f)ans.push_back(s);
+        }
+        return ans;
+    }
+};
