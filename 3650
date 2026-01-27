@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int minCost(int n, vector<vector<int>>& edges) {
+      unordered_map< int , vector<pair< int , int>>> mpp;
+     
+      for( auto & edge: edges){
+        int u = edge[0];
+        int v= edge[1];
+        int wt= edge[2];
+        mpp[u].push_back({ v , wt});
+        mpp[v].push_back({ u , 2*wt});
+      }
+      vector< int> dist( n , 1e9);
+      priority_queue<pair< int , int> , vector< pair< int , int>> , greater< pair< int , int>>>pq;
+    dist[0]=0;
+     pq.push(  { 0 , 0});
+     while( !pq.empty()){
+        int distt= pq.top().first;
+        int node=pq.top().second;
+        pq.pop();
+        if(distt > dist[node]) continue;
+        for( auto it: mpp[node]){
+              int node2 = it.first;
+               int wtt= it.second;
+              
+               if( wtt+ distt< dist[node2] ){
+                dist[node2]= distt+wtt;
+                pq.push( {dist[node2] , node2}) ;
+
+               }
+        }
+
+     }
+     return  dist[n-1]!= 1e9 ? dist[n-1] : -1;
+    }
+};
+| Metric | Complexity           |
+| ------ | -------------------- |
+| Time   | **O((V + E) log V)** |
+| Space  | **O(V + E)**         |
