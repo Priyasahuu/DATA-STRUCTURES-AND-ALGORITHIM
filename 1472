@@ -1,0 +1,54 @@
+class BrowserHistory {
+public:
+    struct node{
+        node* prev;
+        node* next;
+        string val;
+        node(string s){
+            val= s;
+            prev=nullptr;
+            next= nullptr;
+        }
+    };
+   node* head;
+    BrowserHistory(string homepage) {
+       head= new node( homepage) ;
+    }
+    
+    void visit(string url) {
+       node* temp= new node( url);
+       head->next= nullptr;
+       temp->prev= head;
+       head ->next= temp;
+       head= head->next;
+
+          
+    }
+    
+    string back(int steps) {
+       while( head->prev && steps>0){
+        head= head->prev;
+        steps--;
+       } 
+       return head->val;
+    }
+    
+    string forward(int steps) {
+          while( head->next && steps>0){
+            head=  head->next;
+            steps--;
+          }
+          return head->val;
+    }
+};
+
+
+TC= O(1) +O(K)
+SC=O(N)
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
