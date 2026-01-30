@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int secondHighest(string s) {
+        int maxi =INT_MIN;
+        int ans=-1;
+        for( auto it: s){
+            if(isdigit(it)){
+                int num= it-'0';
+                maxi= max( maxi , num);
+            }
+        }
+        for( auto it :s){
+            if(isdigit(it)){
+                int num = it-'0';
+                 if( num< maxi){
+                    ans= max( ans, num);
+                 }
+            }
+        }
+        return ans;
+    }
+};
