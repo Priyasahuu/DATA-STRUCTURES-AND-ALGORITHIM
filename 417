@@ -1,0 +1,43 @@
+class Solution {
+public:
+
+ 
+
+vector<vector<int>> dir={{-1,0} , {0,-1} ,{1,0},{0,1}};
+int n , m;
+void dfs( int i , int j ,vector<vector<bool>>&v ,int prev  , vector<vector<int>>& heights ){
+         if(i >= n || i < 0 ||  j >=m || j <0)return;
+         if( heights[i][j] < prev ||v[i][j])return;
+         v[i][j]=true;
+         for( auto &it : dir){
+            dfs( i+it[0] , j+it[1] ,v, heights[i][j], heights);
+         }
+
+}
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+         n = heights.size();
+         m = heights[0].size();
+        vector<vector<bool>>pacific(n , vector<bool>( m , false) );
+        vector<vector<bool>>atlantic( n , vector< bool>( m  , false));
+        for( int i = 0 ; i < m ; i ++){
+            dfs(0 ,i , pacific, INT_MIN, heights);
+            dfs( n-1 , i , atlantic, INT_MIN,heights);
+        }
+        for( int i = 0 ; i < n ; i ++){
+            dfs(i,0, pacific, INT_MIN, heights);
+            dfs( i , m-1 , atlantic, INT_MIN,heights);
+        }
+        vector<vector<int>> ans;
+        for( int i =  0 ; i < n ; i  ++){
+            for( int j = 0 ; j < m ; j ++){
+                if( pacific[i][j]&& atlantic[i][j]){
+                    ans.push_back({ i , j});
+                    
+                }
+
+            }
+
+        }
+        return ans;
+    }
+};
