@@ -1,0 +1,85 @@
+class Solution {
+public:
+    int calculate(string s) {
+       char op='+';
+       stack<int>st;
+       int n =s.size();
+       int i =0;
+       while(i<n ){
+        if(s[i]==' ')i++;
+        else if(s[i]=='/'||s[i] =='+' ||s[i]=='-'||s[i]=='*'){
+            op=s[i];
+            i++;
+        }
+        else if(i<n && isdigit(s[i])){
+            int num = 0;
+            while(isdigit(s[i])){
+                num = num*10+(s[i]-'0');
+                i++;
+            }
+            if(op=='+'){
+                st.push(num);
+            }
+            else if(op=='-'){
+                st.push(num*-1);
+            }
+            else {
+                if(!st.empty()){
+                    int x= st.top();
+                    st.pop();
+                    (op=='*')?st.push(num*x):st.push(x/num);
+                }
+            }
+        }
+       } 
+
+       int ans=0;
+       while(!st.empty()){
+        ans+=st.top();
+        st.pop();
+       }
+       return ans;
+    }
+};class Solution {
+public:
+    int calculate(string s) {
+       char op='+';
+       stack<int>st;
+       int n =s.size();
+       int i =0;
+       while(i<n ){
+        if(s[i]==' ')i++;
+        else if(s[i]=='/'||s[i] =='+' ||s[i]=='-'||s[i]=='*'){
+            op=s[i];
+            i++;
+        }
+        else if(i<n && isdigit(s[i])){
+            int num = 0;
+            while(isdigit(s[i])){
+                num = num*10+(s[i]-'0');
+                i++;
+            }
+            if(op=='+'){
+                st.push(num);
+            }
+            else if(op=='-'){
+                st.push(num*-1);
+            }
+            else {
+                if(!st.empty()){
+                    int x= st.top();
+                    st.pop();
+                    (op=='*')?st.push(num*x):st.push(x/num);
+                }
+            }
+        }
+       } 
+
+       int ans=0;
+       while(!st.empty()){
+        ans+=st.top();
+        st.pop();
+       }
+       return ans;
+    }
+};
