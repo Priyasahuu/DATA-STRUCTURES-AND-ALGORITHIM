@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+      
+      int n = chars.size();
+     int count =0;
+      int i=0;
+      while(i< n){
+        int cnt=1;
+        char comp=chars[i];
+        
+        int j=i+1;
+        while(j<n && chars[j]==comp){
+            cnt+=1;
+            j++;
+        }
+
+        if(cnt>1) {
+             count+=2;
+            
+          string a= to_string(cnt);
+          for( int  k = 0 ; k < a.size() ; k ++){
+            chars[i+1+k]=a[k];
+          }
+          chars.erase(chars.begin()+i +1+a.size(), chars.begin()+j);
+           i= i+a.size()+1;
+            }
+        else{ 
+            chars.erase(chars.begin() +i+1 , chars.begin()+j);
+            count+=1;
+            i=i+1;
+            }
+         
+      }
+      return count;
+    }
+};
