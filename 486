@@ -1,0 +1,50 @@
+class Solution {
+public:
+    bool f( int& start , int& end , int& p1 , int& p2 ,bool flag ,  vector<int>&nums){
+     if(start >end){
+        return p1>=p2;
+     }
+    bool res1, res2;
+
+        if (flag) {
+            
+            p1 += nums[start];
+            start++;
+            res1 = f(start, end, p1, p2, !flag, nums);
+            start--;
+            p1 -= nums[start];
+
+            p1 += nums[end];
+            end--;
+            res2 = f(start, end, p1, p2, !flag, nums);
+            end++;
+            p1 -= nums[end];
+
+            return res1 || res2;   
+        }
+        else {
+         
+            p2 += nums[start];
+            start++;
+            res1 = f(start, end, p1, p2, !flag, nums);
+            start--;
+            p2 -= nums[start];
+
+            
+            p2 += nums[end];
+            end--;
+            res2 = f(start, end, p1, p2, !flag, nums);
+            end++;
+            p2 -= nums[end];
+
+            return res1 && res2;   
+        }
+    }
+    bool predictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        n=n-1;
+        int p1 =0 , p2=0 , start =0;
+
+        return f(start , n , p1 ,p2 ,true, nums);
+    }
+};
