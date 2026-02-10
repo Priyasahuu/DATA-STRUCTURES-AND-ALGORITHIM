@@ -1,0 +1,18 @@
+class Solution {
+  public:
+  vector<int>ans;
+    void f( vector<int>&arr , int ind , int sum){
+        if( ind ==arr.size()){
+            ans.push_back(sum);
+            return;
+        }
+        f( arr , ind +1 , sum+arr[ind]);
+        f(arr , ind+1 , sum);
+    }
+    vector<int> subsetSums(vector<int>& arr) {
+       f(arr ,0,0);
+       return ans;
+       // code here
+        
+    }
+};
