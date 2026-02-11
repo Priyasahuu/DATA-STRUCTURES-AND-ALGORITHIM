@@ -1,0 +1,29 @@
+class Solution {
+public:
+ void sw( int a , int b , vector<int>&arr){
+    int temp= arr[b];
+    arr[b]=arr[a];
+    arr[a]=temp;
+ }
+   vector<vector<int>>ans;
+   void f( vector<int>& nums ,int idx){
+        if( idx==nums.size()){
+            ans.push_back(nums);
+            return;
+        }
+        for( int i = idx ; i < nums.size() ; i++){
+            sw( idx , i , nums);
+            f( nums , idx+1);
+            sw(idx , i,nums);
+        }
+
+
+   }
+    vector<vector<int>> permute(vector<int>& nums) {
+     
+    
+     
+      f( nums ,0 );
+      return ans;  
+    }
+};
