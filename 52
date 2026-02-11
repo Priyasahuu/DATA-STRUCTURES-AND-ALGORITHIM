@@ -1,0 +1,52 @@
+class Solution {
+public:
+   vector<vector<string>> ans;
+    bool issafe( int row , int col ,vector<string>&ss, int n){
+        int drow= row;
+        int dcol=col;
+        while( row >=0 && col>=0){
+            if( ss[row][col]=='Q')return false;
+            row--;
+            col--;
+
+        }
+        row=drow;
+        col=dcol;
+        while(col>=0){
+             if( ss[row][col]=='Q')return false;
+            col--;
+
+        }
+         row=drow;
+        col=dcol;
+        while( col>=0 &&row<n){
+            if(ss[row][col]=='Q')return false;
+            row++;
+            col--;
+        }
+        return true;
+    }
+   void f( vector<string>& ss , int n , int col){
+    if( col==n){
+        ans.push_back(ss);
+        return;
+    }
+    for( int row= 0 ; row< n ; row++){
+        if(issafe( row , col , ss ,n)){
+            ss[row][col]='Q';
+            f( ss , n , col+1);
+            ss[row][col]='.';
+        }
+    }
+   }  
+
+    int totalNQueens(int n) {
+       vector<string>ss(n);
+        string s( n , '.');
+        for( int i = 0 ; i < n ; i  ++){
+            ss[i]=s;
+        }
+    f( ss , n , 0 );
+    return ans.size();  
+    }
+};
