@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void f( string s , vector<string>&ans , int ind){
+        if( ind ==s.size()){
+            ans.push_back(s);
+            return;
+        }
+        char c= s[ind];
+        if(isalpha(c)){
+            s[ind]=tolower(s[ind]);
+            f( s , ans , ind+1 );
+           s[ind]=toupper(s[ind]);
+            f( s, ans , ind+1);
+            
+
+
+        }
+        else{
+         f( s , ans , ind+1);  
+           
+        
+
+    }
+    }
+    vector<string> letterCasePermutation(string s) {
+        vector<string>ans;
+        f(s , ans , 0);
+        return ans;
+    }
+};
