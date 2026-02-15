@@ -1,0 +1,48 @@
+class Solution {
+  public:
+   vector<string> ans;
+   int n , m;
+    void f( int row , int col , vector<vector<int>>& vis , vector<vector<int>>& maze , string s ){
+        if( row == n-1 && col==m-1){
+            ans.push_back(s);
+            return;
+        }
+        if( row+1< n && maze[row+1][col]==1&&vis[row+1][col]==0){
+            vis[row+1][col]=1;
+            f( row+1, col  , vis , maze , s+'D');
+            vis[row+1][col]=0;
+            
+        }
+         if( col-1 >=0&& maze[row][col-1]==1 &&vis[row][col-1]==0){
+            vis[row][col -1]=1;
+            f( row, col -1 , vis , maze , s+'L');
+            vis[row][col-1]=0;
+            
+        }
+         if( col+1< m && maze[row][col+1]==1 &&vis[row][col+1]==0){
+            vis[row][col+1]=1;
+            f( row, col+1  , vis , maze , s+'R');
+            vis[row][col+1]=0;
+            
+        }
+         if( row-1 >=0 && maze[row-1][col]==1 && vis[row-1][col]==0){
+            vis[row-1][col]=1;
+            f( row-1, col  , vis , maze , s+'U');
+            vis[row-1][col]=0;
+            
+        }
+    }
+    vector<string> ratInMaze(vector<vector<int>>& maze) {
+        // code here
+         n = maze.size();
+         m = maze[0].size();
+        vector<vector<int>>vis( n , vector<int>( m , 0));
+        vis[0][0]=1;
+        f( 0 , 0 ,vis , maze , "");
+        return ans;
+    }
+};
+
+
+TC=4^(M*N)
+SC=M*N
