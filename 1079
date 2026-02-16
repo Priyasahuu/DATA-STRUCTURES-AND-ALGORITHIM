@@ -1,0 +1,24 @@
+class Solution {
+public:
+ int cnt=0;
+   void f(string tiles , vector<int>&s ){
+    
+     for( int i = 0 ; i < tiles.size() ; i++){
+        if(s[i])continue;
+        if( i> 0 && tiles[i]==tiles[i-1] && !s[i-1])continue;
+        s[i]=1;
+        cnt++;
+        f( tiles , s);
+        s[i]=0;
+
+     }
+   }
+    int numTilePossibilities(string tiles) {
+        sort( tiles.begin() , tiles.end());
+        int n = tiles.size();
+       vector<int>s(n , 0);
+
+       f(tiles ,s);
+       return cnt; 
+    }
+};
