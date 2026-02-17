@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        vector<string> s={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+
+      unordered_map< char , string> mpp;
+      int i=0;
+      for( char j='a'; j<='z';j++){
+        mpp[j]=s[i];
+        i++;
+      }
+      set<string>st;
+      for( int i = 0 ; i <words.size() ; i++){
+        string aa= words[i];
+        int m = aa.size();
+        int k =0;
+        string ans;
+        while(k<m ){
+           ans+= mpp[aa[k]];  
+           k++;
+        }
+        st.insert(ans);
+      }
+return st.size();
+    }
+};
