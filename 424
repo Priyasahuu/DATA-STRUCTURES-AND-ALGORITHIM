@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        unordered_map<int , int>mpp;
+         int n = s.size();
+          int r= 0;
+           int l = 0;
+            int maxlen= 0 , maxfreq=0;
+           while( r<n){
+            mpp[s[r]]+=1;
+            maxfreq= max( maxfreq , mpp[s[r]]);
+            while( ((r-l+1)-maxfreq)>k){
+                mpp[s[l]]--;
+                if(mpp[s[l]]==0)mpp.erase(mpp[s[l]]);
+                l++;
+
+            }
+              maxlen =max( r-l+1 , maxlen);
+             r++;
+           }
+           return maxlen;
+    }
+};
