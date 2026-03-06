@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minDeletionSize(vector<string>& strs) {
+      unordered_map<int , string>mpp;
+      int cnt=0;
+       for( string s: strs){
+        int m = s.size();
+        for( int i = 0 ; i  < m ; i ++){
+           
+            mpp[i]+=s[i];
+        }
+       }
+       for( auto it: mpp){
+        string a=it.second;
+       string  b=a;
+        sort(a.begin() , a.end());
+        if( b!=a)cnt+=1;
+       }
+       return cnt;  
+    }
+};
