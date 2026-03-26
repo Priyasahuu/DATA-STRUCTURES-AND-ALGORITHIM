@@ -1,0 +1,24 @@
+class Solution {
+public:
+      string f(string ans  , vector<bool>&used, string pattern){
+        if( ans.size() == pattern.size()+1)return ans;
+          for( int i= 1;i<=9 ;i ++){
+            if(used[i]) continue;
+            int len= ans.size()-1;
+            if( len==-1 ||( pattern[len]=='I' &&ans.back()<(i+'0'))|| (pattern[len]=='D' && ans.back()>(i+'0'))){
+                used[i]=true;
+               string res= f( ans+char(i+'0') , used ,pattern);
+               if(res!="")return res;
+                used[i]=false;
+            }
+          }
+          return "";
+      }
+    string smallestNumber(string pattern) {
+       vector<bool>used(9 , false);
+     
+       string ans="";
+    return f( ans , used , pattern );
+
+    }
+};
