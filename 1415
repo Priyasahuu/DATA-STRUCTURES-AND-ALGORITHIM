@@ -1,0 +1,27 @@
+class Solution {
+public:
+vector<string> ans;
+
+    void f( int n , vector<char>&ss,string s){
+        if( s.size()==n){
+            ans.push_back(s);
+            return ;
+        }
+        int m = ss.size();
+        for( int i = 0 ; i <  m ; i ++){
+            int k=s.size();
+            if(s[k-1]==ss[i])continue;
+            f(n , ss,s+ss[i]);
+        }
+
+    }
+    string getHappyString(int n, int k) {
+       string s="";
+       vector<char>ss = {'a', 'b', 'c'};
+       for( int i = 0 ; i < ss.size();i++) {
+        f(n ,ss, s+ss[i]);
+       }
+       
+       return ans.size()>=k?ans[k-1]:""; 
+    }
+};
